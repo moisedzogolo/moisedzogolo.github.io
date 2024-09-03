@@ -1,0 +1,35 @@
+---
+title: "Assignment 1"
+---
+
+# **General Overview**
+
+The topic of the proposed research is the **theory-practice gap in public transit**. This gap is well documented in the Urban Planning scholarship, but research on the extent of this gap in the public transit scholarship is lacking. However, a growing body of literature in the Urban Planning field suggest that transit decision-makers enact policies that go against the recommendations of transit experts.
+
+In relation to this, transit governance has been proposed as a factor that may increase the divide between experts and decision-makers. More specifically, studies focusing on regional transit agencies have found that local autonomy, which is the ability of a municipality to leave a network, negatively affect agencies' output. Most of those studies are qualitative. I am currently working on a research project studying 84 transit agencies in the 16 largest metropolitan areas in the United States. The preliminary results support the qualitative studies as agencies facing local autonomy have lower performances than those that do not. However, the project did not specifically investigate the level of tension between decision-makers and experts.
+
+The present research thus seeks to fill this gap by determining whether a gap exists between theory and practice, and whether the gap is greater for transit agencies facing local autonomy.
+
+# Data and Methods
+
+To complete this project, I will conduct a textual analysis of articles in high-impact transportation journals from the United States, and I will compare it with planning documents from regional transit agencies. For journal articles, I will study them for as far back as possible, and I will see if trends have changed over the years. Only the latest trends will be compared to planning documents.
+
+I will use a topic model to identify the main topics addressed in both the scholarly community and among transit agencies. A t-test will be used to determine whether the differences of focus on topics are statistically significant.
+
+As for the evolution of transit scholarship over the years, a longitidunal bar graph with different topics will be presented.
+
+# Systematic Literature Review
+
+![](images/Screenshot%20(140).png)
+
+## Research Questions
+
+1.  Is there a gap between theory and practice in public transit?
+
+2.  Is the gap greater for regional transit agencies facing local autonomy?
+
+# Hypotheses
+
+1.  The topics addressed in the transit scholarship are different from those addressed in regional transit agencies' planning documents.
+
+2.  The practice-theory gap is greater for agencies facing local autonomy.
