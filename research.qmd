@@ -4,7 +4,8 @@ title: "Research"
 
 Moise's research interests include:
 
-1. Network Governance
-2. Coproduction of public services
-3. Decision-making processes
-```
+1.  Local Government
+2.  Data Science Applications in the Public Sector
+3.  Network Governance
+4.  Coproduction of public services
+5.  Public participation in Public Administration \`\`\`
