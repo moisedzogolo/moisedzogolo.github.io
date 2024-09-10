@@ -8,4 +8,4 @@ Moise's research interests include:
 2.  Data Science Applications in the Public Sector
 3.  Network Governance
 4.  Coproduction of public services
-5.  Public participation in Public Administration \`\`\`
+5.  Public participation in Public Administration
