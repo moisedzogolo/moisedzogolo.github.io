@@ -10,9 +10,8 @@ website:
         text: Home
       - about.qmd
       - research.qmd
-      - text: "Assignments"
+      - text: "EPPS 6302"
         menu: 
-          - assignment.qmd
 
 format:
   html:
