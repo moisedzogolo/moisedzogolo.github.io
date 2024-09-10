@@ -1,0 +1,18 @@
+---
+title: "Projects"
+---
+
+# Work in Progress
+
+1.  [**Autonomous Municipalities in Regional Transit Networks: Is Network Effectiveness Affected?**]{.underline} This project explores the governance structures of multi-city transit agencies, focusing on how the option for individual cities to withdraw from the agency impacts ridership. Building on prior qualitative research involving interviews with transit professionals, the study confirms that this governance feature affects transit usage. These findings were presented at the 2023 ABFM conference.
+
+2.  [**Collaborative Governance and Revenue Generation: A Study of PILOT Programs in Boston**]{.underline} This paper explores the dynamics of Payment in Lieu of Taxes (PILOT) programs, focusing on the collaborative process between local governments and tax-exempt entities. Using Boston's highly regarded PILOT program as a case study, the research examines why cities initiate these programs and how nonprofits respond once they join. The study provides insights into the governance structures that contribute to the success of PILOT programs, highlighting the balance between municipal revenue generation and cooperation with nonprofits. The findings offer valuable lessons for other cities looking to implement or enhance their own PILOT initiatives.
+
+3.  [**Harnessing Big Data: Best Practices for Local Governments in Data Collection and Processing**]{.underline} This paper explores best practices for the collection, processing, and analysis of big data, with a focus on local government applications. As data generation continues to expand at an unprecedented rate, particularly due to the digitalization of services, the ability to effectively manage and derive insights from this data becomes essential for public sector organizations. Through case studies and a review of current methodologies, this research provides practical strategies for local governments to unlock the potential of big data, while addressing associated challenges such as privacy concerns.
+
+4.  [**Addressing the Hollow State: Enhancing Emergency Response through Coproduction**]{.underline} This paper examines the concept of the "hollow state," where traditional government roles in social issues are diminished due to the increased prominence of non-state actors. Specifically, it explores how coproduction—where governments collaborate with non-state actors—can supplement state capacity in delivering public services, particularly in emergency response. By analyzing the evolving role of non-state actors in the U.S. and the UK, the paper investigates whether coproduction is more effective than exclusive government provision and evaluates its impact on emergency services. The research highlights the potential benefits and challenges of this collaborative approach in strengthening state responses to crises.
+
+5.  [**Participation Without Citizenship: Exploring Civic Involvement of Non-Naturalized Immigrants**]{.underline} This qualitative research explores the political participation of non-naturalized immigrants in the United States. Through participant observation of immigrants at political demonstrations and in-depth interviews with immigrants engaged in politics and government workers supporting immigrant integration, the study investigates the dynamics of political involvement among this group. The research delves into how various factors, such as legal consciousness and socioeconomic status influence their engagement. By examining these interactions and experiences, the study aims to provide nuanced insights into the challenges and opportunities for non-naturalized immigrants in participating in the political sphere.
+
+```         
+```

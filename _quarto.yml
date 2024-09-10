@@ -8,9 +8,11 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - projects.qmd
       - research.qmd
       - text: "EPPS 6302"
+        menu:
+          - Assignment1.qmd
 
 format:
   html:
