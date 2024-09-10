@@ -12,7 +12,8 @@ website:
       - research.qmd
       - text: "EPPS 6302"
         menu:
-          - Assignment1.qmd
+          - href: Assignment 1.qmd
+            text: "Assignment #1"
 
 format:
   html:
