@@ -11,7 +11,6 @@ website:
       - about.qmd
       - research.qmd
       - text: "EPPS 6302"
-        menu: 
 
 format:
   html:
