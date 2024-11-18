@@ -18,7 +18,7 @@ website:
             text: "Assignment #5"
       - text: "EPPS 6356"
         menu:
-          - href: "EPPS 6356//6356Assignment 1.qmd"
+          - href: "EPPS 6356/6356Assignment 1.qmd"
             text: "Assignment #1"
 
 format:
