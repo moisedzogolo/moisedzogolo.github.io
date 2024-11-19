@@ -38,7 +38,7 @@ In the block below, I retrieve data on the videos that appear when searching for
 
 ```{r}
 #| include: false
-us_election2024 <- read.csv("EPPS 6302/yt_search_results_election_24_us.csv")
+us_election2024 <- read.csv("yt_search_results_election_24_us.csv")
 ```
 
 ```{r}

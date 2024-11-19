@@ -1,0 +1,122 @@
+---
+title: "Assignment #5 - Part 2: Quanteda"
+author: "Moise Dzogolo"
+---
+
+## Introduction
+
+This projects replicates the YouTube election coverage analysis performed [here](Dzogolo_Assignment5.qmd). The particularity of the present project is the use of the `quanteda` package and the suite of accompanying libraries.
+
+## Libraries loading and data pre-processing
+
+In the block below, I load the YouTube dataset collected in the previous project, and I create a corpus to begin my analysis with `quanteda`. I also create and indicator variable to determine whether a video was posted before or after election day.
+
+```{r}
+#| include: false
+path = "C:/Users/moise/OneDrive - The University of Texas at Dallas/Documents/PhD Courses/Data Science for Social Inquiry/moisedzogolo.github.io/moisedzogolo.github.io/EPPS6302/yt_search_results_election_24_US.csv"
+```
+
+```{r}
+# Loading Packages
+pacman::p_load(quanteda, quanteda.textplots, quanteda.textmodels, dplyr, readtext)
+
+# Loading dataset
+data <- readtext(path, text_field = 'title')
+
+# Creating the corpus
+yt_corpus <- corpus(data)
+
+# Quick inspection of the corpus and data prep
+docvars(yt_corpus) |> names()
+docvars(yt_corpus, 'pub_date') <- as.Date(docvars(yt_corpus, 'publishedAt'))
+docvars(yt_corpus, 'pub_date') |> head()
+docvars(yt_corpus, 'after_election_day') <- docvars(yt_corpus, 'pub_date') >= as.Date("2024-11-05")
+docvars(yt_corpus, 'after_election_day') <- docvars(yt_corpus, 'after_election_day') |> as.integer()
+```
+
+In the lines below, I perform further preprocessing tasks. Namely, I create tokens, remove punctuations and stopwords, and I create document feature matrices. I also create an indicator variable to determine whether the videos were posted by CNN.
+
+```{r}
+docvars(yt_corpus, 'channelTitle') |> table() |> as.data.frame() |> top_n(5) |> print() # Top 10 channels by number of posts
+docvars(yt_corpus, 'CNN_post') <- docvars(yt_corpus, 'channelTitle') == "CNN"
+```
+
+## Analysis of Title Content
+
+The next six word cloud replicate those generated in [the previous project](Dzogolo_Assignment5.qmd)
+```{r}
+toks <- yt_corpus |>
+  tokens(remove_punct = TRUE) |>
+  tokens_tolower() |>
+  tokens_remove(stopwords("en"))
+dfm_all = dfm(toks)
+set.seed(123)
+textplot_wordcloud(dfm_all, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))
+```
+Figure 1. 50 Most Frequent Words Used in US-Election Related YouTube Posts as of 11/18/2024
+
+
+```{r}
+dfm_before = corpus_subset(yt_corpus, after_election_day == 0) |>
+  tokens(remove_punct = TRUE) |>
+  tokens_remove(stopwords('en')) |>
+  dfm()
+set.seed(123)
+textplot_wordcloud(dfm_before, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))
+```
+Figure 2. 50 Most Frequent Words Used in US-Election Related YouTube Posts Before Election Day
+
+
+```{r}
+dfm_after <- yt_corpus |> 
+  corpus_subset(after_election_day == 1) |>
+  tokens(remove_punct = T, remove_symbols = T) |>
+  tokens_remove(stopwords("en")) |>
+  dfm()
+set.seed(123)
+textplot_wordcloud(dfm_after, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))
+```
+Figure 3. 50 Most Frequent Words Used in US-Election Related YouTube Posts after Election Day as of 11/18/2024
+
+
+```{r}
+dfm_cnn <- yt_corpus |>
+  corpus_subset(CNN_post == T) |>
+  tokens(remove_punct = T) |>
+  tokens_remove(stopwords("en")) |>
+  dfm()
+set.seed(123)
+textplot_wordcloud(dfm_cnn, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))
+```
+Figure 4. 50 Most Frequent Words Used in US-Election Related YouTube Videos Posted by CNN as of 11/18/2024
+
+
+```{r}
+dfm_cnn_before <- yt_corpus |>
+  corpus_subset(CNN_post == T) |>
+  corpus_subset(after_election_day == 0) |>
+  tokens(remove_punct = T) |>
+  tokens_remove(stopwords("en")) |>
+  dfm()
+set.seed(123)
+textplot_wordcloud(dfm_cnn_before, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))
+```
+Figure 5. 50 Most Frequent Words Used in US-Election Related YouTube Videos Posted before Election Day
+
+
+```{r}
+dfm_cnn_after <- yt_corpus |>
+  corpus_subset(CNN_post == T) |>
+  corpus_subset(after_election_day == 1) |> 
+  tokens(remove_punct = T) |>
+  tokens_remove(stopwords("en")) |>
+  dfm()
+set.seed(123)
+textplot_wordcloud(dfm_cnn_after, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))
+```
+Figure 6. 50 Most Frequent Words Used in US-Election Related YouTube Videos Posted by CNN after Election Day as of 11/18/2024
+
+
+## Concluding Remarks
+`quanteda` can be used to perform the same analysis conducted in [the previous project](Dzogolo_Assignment5.qmd). While several packages were used to prepocess the in the earlier project, quanteda offers virtually all the tools to carry out the project from the beginning to the end. `readtext` is a useful package to read text data from `csv` files, but it can also read from `json` and and `XML`.
+One notable difference in text processing is that `stringi` and `tm` seemed to have performed a better job removing stopwords and punctuation. Indeed, the word cloud in the current project included noticeably more unwanted characters than the ones in the earlier project.

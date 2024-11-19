@@ -124,5 +124,201 @@
     "title": "Assignment 5",
     "section": "Concluding Remarks",
     "text": "Concluding Remarks\nThis project aimed to demonstrate the use of NLP techniques for conducting an exploratory data analysis of YouTube content. Code was provided to help others replicate the results.\nThe study revealed interesting patterns that can be explored further. For example, media outlets tend to mention Trump more than Harris in their YouTube content, especially after the election results were announced. CNN, however, seemed to offer balanced coverage of both Trump and Harris before election day. After the results were published, CNN, like other media, reduced coverage of Harris. Another notable difference with CNN is that, after the results were announced, they used more neutral terms like “results” or “election” and less frequently mentioned “Trump.”"
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment5.html",
+    "href": "EPPS 6302/Dzogolo_Assignment5.html",
+    "title": "Assignment 5",
+    "section": "",
+    "text": "YouTube plays a critical role in shaping public discourse, especially during major events such as the 2024 U.S. elections. In this project, I will demonstrate how to use natural language processing (NLP) techniques in R to analyze election-related videos.\nThe analysis will proceed in three steps:\n\nAnalyzing All Content: I will start by examining all election-related videos to identify overall trends.\nFocusing on CNN: Next, I will narrow the analysis to videos uploaded by CNN to understand how its content differs from the general landscape.\nComparing Before and After Election Day: Finally, I will explore how the narratives shift before and after Election Day for both datasets."
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment5.html#introduction",
+    "href": "EPPS 6302/Dzogolo_Assignment5.html#introduction",
+    "title": "Assignment 5",
+    "section": "",
+    "text": "YouTube plays a critical role in shaping public discourse, especially during major events such as the 2024 U.S. elections. In this project, I will demonstrate how to use natural language processing (NLP) techniques in R to analyze election-related videos.\nThe analysis will proceed in three steps:\n\nAnalyzing All Content: I will start by examining all election-related videos to identify overall trends.\nFocusing on CNN: Next, I will narrow the analysis to videos uploaded by CNN to understand how its content differs from the general landscape.\nComparing Before and After Election Day: Finally, I will explore how the narratives shift before and after Election Day for both datasets."
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment5.html#relevant-libraries",
+    "href": "EPPS 6302/Dzogolo_Assignment5.html#relevant-libraries",
+    "title": "Assignment 5",
+    "section": "Relevant Libraries",
+    "text": "Relevant Libraries\nTo load all the necessary libraries for this analysis, I used the p_load() function from the pacman package. The tuber package is the main tool for retrieving data from YouTube. For text preprocessing, I use stringi to remove punctuation, and tm to eliminate stop words. Finally, the wordcloud package will be used to visualize the results.\n\n# Loading Libraries\npacman::p_load(tuber, stringi, lubridate, tm, wordcloud, ggplot2, httr, gridExtra, dplyr, stringr)"
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment5.html#authenticating-your-youtube-api-credentials",
+    "href": "EPPS 6302/Dzogolo_Assignment5.html#authenticating-your-youtube-api-credentials",
+    "title": "Assignment 5",
+    "section": "Authenticating your YouTube API credentials",
+    "text": "Authenticating your YouTube API credentials\nTo access the YouTube API, authorization is required, which can be obtained through the Google Developer Console. Once this step is completed, the credentials must be authenticated. The tuber package provides a straightforward function to facilitate this authentication process.\n\n# yt_oauth(ClientID, ClientSecret, token = \"\")"
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment5.html#obtaining-data-from-youtube",
+    "href": "EPPS 6302/Dzogolo_Assignment5.html#obtaining-data-from-youtube",
+    "title": "Assignment 5",
+    "section": "Obtaining Data from YouTube",
+    "text": "Obtaining Data from YouTube\nIn the block below, I retrieve data on the videos that appear when searching for “US Elections 2024” on YouTube. Afterward, I preprocess the retrieved data for further analysis. A key step in this process is creating a data variable that will allow me to split the dataset into two subsets: one for pre-election day content and another for post-election day content.\n\n# us_election2024 &lt;- yt_search(\"US Elections 2024\")\nus_election2024 &lt;- mutate(us_election2024, pub_date = as.Date(publishedAt))\n\n\nnames(us_election2024)\n\n [1] \"X\"                         \"video_id\"                 \n [3] \"publishedAt\"               \"channelId\"                \n [5] \"title\"                     \"description\"              \n [7] \"thumbnails.default.url\"    \"thumbnails.default.width\" \n [9] \"thumbnails.default.height\" \"thumbnails.medium.url\"    \n[11] \"thumbnails.medium.width\"   \"thumbnails.medium.height\" \n[13] \"thumbnails.high.url\"       \"thumbnails.high.width\"    \n[15] \"thumbnails.high.height\"    \"channelTitle\"             \n[17] \"liveBroadcastContent\"      \"publishTime\"              \n[19] \"pub_date\"                 \n\ncnn_posts &lt;- us_election2024 |&gt; filter(channelTitle == \"CNN\")\n\npre_election_posts &lt;- us_election2024 |&gt; filter(pub_date &lt; as.Date(\"2024-11-05\"))\npost_election_posts &lt;- us_election2024 |&gt; filter(pub_date &gt;= as.Date(\"2024-11-05\"))\npre_el_cnn &lt;- cnn_posts |&gt; filter(pub_date &lt; as.Date(\"2024-11-05\"))\npost_el_cnn &lt;- cnn_posts |&gt; filter(pub_date &gt;= as.Date(\"2024-11-05\"))"
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment5.html#analysis-of-all-youtube-videos",
+    "href": "EPPS 6302/Dzogolo_Assignment5.html#analysis-of-all-youtube-videos",
+    "title": "Assignment 5",
+    "section": "Analysis of all YouTube Videos",
+    "text": "Analysis of all YouTube Videos\nThe analysis in this section, as well as in the subsequent ones, will focus on the titles of YouTube videos. The goal is to identify the most prevalent words used in these titles to understand how uploaders are framing their coverage of the elections. To visualize the frequency of these words, Word Clouds will be used, providing a clear and intuitive way to highlight key themes.\n\ntitles &lt;- us_election2024$title\ntitles_clean &lt;- titles |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\n\nword_freq &lt;- titles_clean |&gt; table() |&gt; as.data.frame(stringsAsFactors = FALSE)\ncolnames(word_freq) &lt;- c(\"word\", \"freq\")\nword_freq &lt;- filter(word_freq, !word %in% tm::stopwords(\"en\"))\n\nset.seed(123)\nwordcloud(word_freq$word, freq = word_freq$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 1. Word Frequency in US-Election Related Youtube Videos as of 11/18/2024\nAs shown in the word cloud above, Donald Trump’s name appears more frequently than Kamala Harris’s name. I suspect this is because, as of November 18, 2024, Donald Trump had been announced as the election winner nearly two weeks prior. Consequently, media coverage has likely focused more extensively on him. Further analyses in the sections below will help to either support or refute this hypothesis."
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment5.html#analysis-of-cnn-videos",
+    "href": "EPPS 6302/Dzogolo_Assignment5.html#analysis-of-cnn-videos",
+    "title": "Assignment 5",
+    "section": "Analysis of CNN Videos",
+    "text": "Analysis of CNN Videos\nBefore conducting a before-and-after analysis of election coverage on YouTube, I will first examine whether CNN’s reporting on the elections differs from that of all media outlets in general. The script used for this analysis is provided below:\n\ncnn_titles &lt;- cnn_posts$title\ncnn_titles_clean &lt;- cnn_titles |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\ncnn_word_freq &lt;- cnn_titles_clean |&gt; table() |&gt; as.data.frame(stringsAsValues = F)\ncolnames(cnn_word_freq) &lt;- c(\"word\", \"freq\")\ncnn_word_freq &lt;- cnn_word_freq |&gt; filter(!word %in% tm::stopwords(\"en\"))\n\nset.seed(123)\nwordcloud(cnn_word_freq$word, freq = cnn_word_freq$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 2. Word Frequency in YouTube Titles from CNN as of 11/18/2024\nThe word cloud indicates that Trump remains the most frequently mentioned name in YouTube video titles. However, the difference is less pronounced compared to the analysis of all videos. Another frequently appearing word in CNN titles is “Enten,” which refers to one of their journalists, Harry Enten."
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment5.html#prepost-election-day-analysis",
+    "href": "EPPS 6302/Dzogolo_Assignment5.html#prepost-election-day-analysis",
+    "title": "Assignment 5",
+    "section": "Pre/Post Election Day Analysis",
+    "text": "Pre/Post Election Day Analysis\n\nAll videos\n\nBefore Election Day\nIn the word cloud below, containing only title of videos published before election day, Trump continues to lead in mentions within YouTube video titles. However, the difference is less pronounced compared to the first word cloud (fig. 1), aligning more closely with CNN’s coverage patternsb(fig. 2).\n\npre_election_posts &lt;- us_election2024 |&gt; filter(pub_date &lt; as.Date(\"2024-11-05\"))\npre_el_title = pre_election_posts$title\npost_el_title = post_election_posts$title\npre_el_clean = pre_el_title |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \")|&gt;\n  unlist()\n\npost_el_clean &lt;- post_el_title |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\n\nword_freq_pre_el &lt;- table(pre_el_clean) |&gt; \n  as.data.frame(stringsAsFactors = FALSE) \ncolnames(word_freq_pre_el) &lt;- c(\"word\", \"freq\")\nword_freq_pre_el &lt;- word_freq_pre_el |&gt; filter(!word %in% tm::stopwords(\"en\"))\nset.seed(123)\nwordcloud(word_freq_pre_el$word, freq = word_freq_pre_el$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 3. Word Frequency in YouTube Titles Before Election Day as of 11/18/2024\n\n\nAfter Election Day\nIn sharp contrast to fig. 3, Trump takes a clear lead in title mentions after the election results were published. This shift lends further support to my hypothesis that media outlets began reporting significantly more about Trump than Harris after he was declared the winner of the race.\n\npost_election_posts &lt;- us_election2024 |&gt; filter(pub_date &gt;= as.Date(\"2024-11-05\"))\npost_el_title = post_election_posts$title\npost_el_clean &lt;- post_el_title |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\n\nword_freq_post_el &lt;- post_el_clean |&gt; table() |&gt;\n  as.data.frame(stringsAsFactors = F)\ncolnames(word_freq_post_el) &lt;- c(\"word\", \"freq\")\nword_freq_post_el &lt;- word_freq_post_el |&gt; filter(!word %in% tm::stopwords(\"en\"))\n\nset.seed(123)\nwordcloud(word_freq_post_el$word, freq = word_freq_post_el$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 4. Word Frequency in US-Election-Related YouTube Videos After Election Day as of 11/18/2024\n\n\n\nCNN Videos\n\nBefore Election Day\nIn CNN posts published before election day, Trump and Harris are mentioned in titles at nearly equal rates. This finding is noteworthy, as it may suggest that CNN aimed to maintain a balanced level of exposure for each candidate. However, further research is required to substantiate this observation.\n\npre_el_cnn &lt;- cnn_posts |&gt; filter(pub_date &lt; as.Date(\"2024-11-05\"))\ncnn_pre_el_titles = pre_el_cnn$title\ncnn_pre_titles_clean &lt;- cnn_pre_el_titles |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\n\ncnn_pre_word_freq &lt;- cnn_pre_titles_clean |&gt; table() |&gt; as.data.frame(stringsAsFactors = F)\ncolnames(cnn_pre_word_freq) &lt;- c(\"word\", \"freq\")\ncnn_pre_word_freq &lt;- cnn_pre_word_freq |&gt; filter(!word %in% tm::stopwords(\"en\"))\n\nset.seed(123)\nwordcloud(cnn_pre_word_freq$word, freq = cnn_pre_word_freq$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 5. Word Frequency in US-Election Related YouTube Videos Before Election Day from CNN as of 11/18/2024\n\n\nAfter Election Day\nAfter election day, Harris disappears from the list of most frequent words in CNN’s YouTube titles. However, CNN appears to use terms like “election” and “result” significantly more often than the word “Trump.”\n\npost_el_cnn &lt;- cnn_posts |&gt; filter(pub_date &gt;= as.Date(\"2024-11-05\"))\ncnn_post_el_titles &lt;- post_el_cnn$title\ncnn_post_titles_clean &lt;- cnn_post_el_titles |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\n\ncnn_post_word_freq &lt;- cnn_post_titles_clean |&gt; table() |&gt; as.data.frame(stringsAsValues = F)\ncolnames(cnn_post_word_freq) &lt;- c(\"word\", \"freq\")\ncnn_post_word_freq &lt;- filter(cnn_post_word_freq, !word %in% tm::stopwords(\"en\"))\n\nset.seed(123)\nwordcloud(cnn_post_word_freq$word, freq = cnn_post_word_freq$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 6. Word Frequency in US-Election Related Youtube Videos After Election Day from CNN as of 11/1/2024"
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment5.html#concluding-remarks",
+    "href": "EPPS 6302/Dzogolo_Assignment5.html#concluding-remarks",
+    "title": "Assignment 5",
+    "section": "Concluding Remarks",
+    "text": "Concluding Remarks\nThis project aimed to demonstrate the use of NLP techniques for conducting an exploratory data analysis of YouTube content. Code was provided to help others replicate the results.\nThe study revealed interesting patterns that can be explored further. For example, media outlets tend to mention Trump more than Harris in their YouTube content, especially after the election results were announced. CNN, however, seemed to offer balanced coverage of both Trump and Harris before election day. After the results were published, CNN, like other media, reduced coverage of Harris. Another notable difference with CNN is that, after the results were announced, they used more neutral terms like “results” or “election” and less frequently mentioned “Trump.”"
+  },
+  {
+    "objectID": "EPPS 6302/Assignment 1.html",
+    "href": "EPPS 6302/Assignment 1.html",
+    "title": "Assignment 1",
+    "section": "",
+    "text": "My assignment #1 will be uploaded here when ready."
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment6.html",
+    "href": "EPPS 6302/Dzogolo_Assignment6.html",
+    "title": "Assignment #5 - Quanteda",
+    "section": "",
+    "text": "This projects replicates the YouTube election coverage analysis performed here"
+  },
+  {
+    "objectID": "EPPS 6302/Dzogolo_Assignment6.html#introduction",
+    "href": "EPPS 6302/Dzogolo_Assignment6.html#introduction",
+    "title": "Assignment #5 - Quanteda",
+    "section": "",
+    "text": "This projects replicates the YouTube election coverage analysis performed here"
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5_2.html",
+    "href": "EPPS6302/Dzogolo_Assignment5_2.html",
+    "title": "Assignment #5 - Part 2: Quanteda",
+    "section": "",
+    "text": "This projects replicates the YouTube election coverage analysis performed here. The particularity of the present project is the use of the quanteda package and the suite of accompanying libraries."
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5_2.html#introduction",
+    "href": "EPPS6302/Dzogolo_Assignment5_2.html#introduction",
+    "title": "Assignment #5 - Part 2: Quanteda",
+    "section": "",
+    "text": "This projects replicates the YouTube election coverage analysis performed here. The particularity of the present project is the use of the quanteda package and the suite of accompanying libraries."
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5_2.html#libraries-loading-and-data-pre-processing",
+    "href": "EPPS6302/Dzogolo_Assignment5_2.html#libraries-loading-and-data-pre-processing",
+    "title": "Assignment #5 - Part 2: Quanteda",
+    "section": "Libraries loading and data pre-processing",
+    "text": "Libraries loading and data pre-processing\nIn the block below, I load the YouTube dataset collected in the previous project, and I create a corpus to begin my analysis with quanteda. I also create and indicator variable to determine whether a video was posted before or after election day.\n\n# Loading Packages\npacman::p_load(quanteda, quanteda.textplots, quanteda.textmodels, dplyr, readtext)\n\n# Loading dataset\ndata &lt;- readtext(path, text_field = 'title')\n\n# Creating the corpus\nyt_corpus &lt;- corpus(data)\n\n# Quick inspection of the corpus and data prep\ndocvars(yt_corpus) |&gt; names()\n\n [1] \"V1\"                        \"video_id\"                 \n [3] \"publishedAt\"               \"channelId\"                \n [5] \"description\"               \"thumbnails.default.url\"   \n [7] \"thumbnails.default.width\"  \"thumbnails.default.height\"\n [9] \"thumbnails.medium.url\"     \"thumbnails.medium.width\"  \n[11] \"thumbnails.medium.height\"  \"thumbnails.high.url\"      \n[13] \"thumbnails.high.width\"     \"thumbnails.high.height\"   \n[15] \"channelTitle\"              \"liveBroadcastContent\"     \n[17] \"publishTime\"               \"pub_date\"                 \n\ndocvars(yt_corpus, 'pub_date') &lt;- as.Date(docvars(yt_corpus, 'publishedAt'))\ndocvars(yt_corpus, 'pub_date') |&gt; head()\n\n[1] \"2024-11-15\" \"2024-11-14\" \"2024-11-06\" \"2024-11-12\" \"2024-11-06\"\n[6] \"2024-11-06\"\n\ndocvars(yt_corpus, 'after_election_day') &lt;- docvars(yt_corpus, 'pub_date') &gt;= as.Date(\"2024-11-05\")\ndocvars(yt_corpus, 'after_election_day') &lt;- docvars(yt_corpus, 'after_election_day') |&gt; as.integer()\n\nIn the lines below, I perform further preprocessing tasks. Namely, I create tokens, remove punctuations and stopwords, and I create document feature matrices. I also create an indicator variable to determine whether the videos were posted by CNN.\n\ndocvars(yt_corpus, 'channelTitle') |&gt; table() |&gt; as.data.frame() |&gt; top_n(5) |&gt; print() # Top 10 channels by number of posts\n\nSelecting by Freq\n\n\n        Var1 Freq\n1   BBC News   19\n2        CNN   37\n3 CNN-News18   18\n4  Firstpost   50\n5   Sky News   30\n\ndocvars(yt_corpus, 'CNN_post') &lt;- docvars(yt_corpus, 'channelTitle') == \"CNN\""
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5_2.html#analysis-of-title-content",
+    "href": "EPPS6302/Dzogolo_Assignment5_2.html#analysis-of-title-content",
+    "title": "Assignment #5 - Part 2: Quanteda",
+    "section": "Analysis of Title Content",
+    "text": "Analysis of Title Content\nThe next six word cloud replicate those generated in the previous project\n\ntoks &lt;- yt_corpus |&gt;\n  tokens(remove_punct = TRUE) |&gt;\n  tokens_tolower() |&gt;\n  tokens_remove(stopwords(\"en\"))\ndfm_all = dfm(toks)\nset.seed(123)\ntextplot_wordcloud(dfm_all, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))\n\n\n\n\n\n\n\n\nFigure 1. 50 Most Frequent Words Used in US-Election Related YouTube Posts as of 11/18/2024\n\ndfm_before = corpus_subset(yt_corpus, after_election_day == 0) |&gt;\n  tokens(remove_punct = TRUE) |&gt;\n  tokens_remove(stopwords('en')) |&gt;\n  dfm()\nset.seed(123)\ntextplot_wordcloud(dfm_before, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))\n\n\n\n\n\n\n\n\nFigure 2. 50 Most Frequent Words Used in US-Election Related YouTube Posts Before Election Day\n\ndfm_after &lt;- yt_corpus |&gt; \n  corpus_subset(after_election_day == 1) |&gt;\n  tokens(remove_punct = T, remove_symbols = T) |&gt;\n  tokens_remove(stopwords(\"en\")) |&gt;\n  dfm()\nset.seed(123)\ntextplot_wordcloud(dfm_after, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))\n\n\n\n\n\n\n\n\nFigure 3. 50 Most Frequent Words Used in US-Election Related YouTube Posts after Election Day as of 11/18/2024\n\ndfm_cnn &lt;- yt_corpus |&gt;\n  corpus_subset(CNN_post == T) |&gt;\n  tokens(remove_punct = T) |&gt;\n  tokens_remove(stopwords(\"en\")) |&gt;\n  dfm()\nset.seed(123)\ntextplot_wordcloud(dfm_cnn, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))\n\n\n\n\n\n\n\n\nFigure 4. 50 Most Frequent Words Used in US-Election Related YouTube Videos Posted by CNN as of 11/18/2024\n\ndfm_cnn_before &lt;- yt_corpus |&gt;\n  corpus_subset(CNN_post == T) |&gt;\n  corpus_subset(after_election_day == 0) |&gt;\n  tokens(remove_punct = T) |&gt;\n  tokens_remove(stopwords(\"en\")) |&gt;\n  dfm()\nset.seed(123)\ntextplot_wordcloud(dfm_cnn_before, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))\n\n\n\n\n\n\n\n\nFigure 5. 50 Most Frequent Words Used in US-Election Related YouTube Videos Posted before Election Day\n\ndfm_cnn_after &lt;- yt_corpus |&gt;\n  corpus_subset(CNN_post == T) |&gt;\n  corpus_subset(after_election_day == 1) |&gt; \n  tokens(remove_punct = T) |&gt;\n  tokens_remove(stopwords(\"en\")) |&gt;\n  dfm()\nset.seed(123)\ntextplot_wordcloud(dfm_cnn_after, max_words = 50, min_size = 2, max_size = 6.5, color = colorspace::diverge_hcl(5))\n\n\n\n\n\n\n\n\nFigure 6. 50 Most Frequent Words Used in US-Election Related YouTube Videos Posted by CNN after Election Day as of 11/18/2024"
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5_2.html#concluding-remarks",
+    "href": "EPPS6302/Dzogolo_Assignment5_2.html#concluding-remarks",
+    "title": "Assignment #5 - Part 2: Quanteda",
+    "section": "Concluding Remarks",
+    "text": "Concluding Remarks\nquanteda can be used to perform the same analysis conducted in the previous project. While several packages were used to prepocess the in the earlier project, quanteda offers virtually all the tools to carry out the project from the beginning to the end. readtext is a useful package to read text data from csv files, but it can also read from json and and XML. One notable difference in text processing is that stringi and tm seemed to have performed a better job removing stopwords and punctuation. Indeed, the word cloud in the current project included noticeably more unwanted characters than the ones in the earlier project."
+  },
+  {
+    "objectID": "EPPS6356/6356Assignment 1.html",
+    "href": "EPPS6356/6356Assignment 1.html",
+    "title": "Assignment 1",
+    "section": "",
+    "text": "My assignment #1 will be uploaded here when ready."
+  },
+  {
+    "objectID": "EPPS6302/Assignment 1.html",
+    "href": "EPPS6302/Assignment 1.html",
+    "title": "Assignment 1",
+    "section": "",
+    "text": "My assignment #1 will be uploaded here when ready."
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5.html",
+    "href": "EPPS6302/Dzogolo_Assignment5.html",
+    "title": "Assignment 5",
+    "section": "",
+    "text": "YouTube plays a critical role in shaping public discourse, especially during major events such as the 2024 U.S. elections. In this project, I will demonstrate how to use natural language processing (NLP) techniques in R to analyze election-related videos.\nThe analysis will proceed in three steps:\n\nAnalyzing All Content: I will start by examining all election-related videos to identify overall trends.\nFocusing on CNN: Next, I will narrow the analysis to videos uploaded by CNN to understand how its content differs from the general landscape.\nComparing Before and After Election Day: Finally, I will explore how the narratives shift before and after Election Day for both datasets."
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5.html#introduction",
+    "href": "EPPS6302/Dzogolo_Assignment5.html#introduction",
+    "title": "Assignment 5",
+    "section": "",
+    "text": "YouTube plays a critical role in shaping public discourse, especially during major events such as the 2024 U.S. elections. In this project, I will demonstrate how to use natural language processing (NLP) techniques in R to analyze election-related videos.\nThe analysis will proceed in three steps:\n\nAnalyzing All Content: I will start by examining all election-related videos to identify overall trends.\nFocusing on CNN: Next, I will narrow the analysis to videos uploaded by CNN to understand how its content differs from the general landscape.\nComparing Before and After Election Day: Finally, I will explore how the narratives shift before and after Election Day for both datasets."
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5.html#relevant-libraries",
+    "href": "EPPS6302/Dzogolo_Assignment5.html#relevant-libraries",
+    "title": "Assignment 5",
+    "section": "Relevant Libraries",
+    "text": "Relevant Libraries\nTo load all the necessary libraries for this analysis, I used the p_load() function from the pacman package. The tuber package is the main tool for retrieving data from YouTube. For text preprocessing, I use stringi to remove punctuation, and tm to eliminate stop words. Finally, the wordcloud package will be used to visualize the results.\n\n# Loading Libraries\npacman::p_load(tuber, stringi, lubridate, tm, wordcloud, ggplot2, httr, gridExtra, dplyr, stringr)"
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5.html#authenticating-your-youtube-api-credentials",
+    "href": "EPPS6302/Dzogolo_Assignment5.html#authenticating-your-youtube-api-credentials",
+    "title": "Assignment 5",
+    "section": "Authenticating your YouTube API credentials",
+    "text": "Authenticating your YouTube API credentials\nTo access the YouTube API, authorization is required, which can be obtained through the Google Developer Console. Once this step is completed, the credentials must be authenticated. The tuber package provides a straightforward function to facilitate this authentication process.\n\n# yt_oauth(ClientID, ClientSecret, token = \"\")"
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5.html#obtaining-data-from-youtube",
+    "href": "EPPS6302/Dzogolo_Assignment5.html#obtaining-data-from-youtube",
+    "title": "Assignment 5",
+    "section": "Obtaining Data from YouTube",
+    "text": "Obtaining Data from YouTube\nIn the block below, I retrieve data on the videos that appear when searching for “US Elections 2024” on YouTube. Afterward, I preprocess the retrieved data for further analysis. A key step in this process is creating a data variable that will allow me to split the dataset into two subsets: one for pre-election day content and another for post-election day content.\n\n# us_election2024 &lt;- yt_search(\"US Elections 2024\")\nus_election2024 &lt;- mutate(us_election2024, pub_date = as.Date(publishedAt))\n\n\nnames(us_election2024)\n\n [1] \"X\"                         \"video_id\"                 \n [3] \"publishedAt\"               \"channelId\"                \n [5] \"title\"                     \"description\"              \n [7] \"thumbnails.default.url\"    \"thumbnails.default.width\" \n [9] \"thumbnails.default.height\" \"thumbnails.medium.url\"    \n[11] \"thumbnails.medium.width\"   \"thumbnails.medium.height\" \n[13] \"thumbnails.high.url\"       \"thumbnails.high.width\"    \n[15] \"thumbnails.high.height\"    \"channelTitle\"             \n[17] \"liveBroadcastContent\"      \"publishTime\"              \n[19] \"pub_date\"                 \n\ncnn_posts &lt;- us_election2024 |&gt; filter(channelTitle == \"CNN\")\n\npre_election_posts &lt;- us_election2024 |&gt; filter(pub_date &lt; as.Date(\"2024-11-05\"))\npost_election_posts &lt;- us_election2024 |&gt; filter(pub_date &gt;= as.Date(\"2024-11-05\"))\npre_el_cnn &lt;- cnn_posts |&gt; filter(pub_date &lt; as.Date(\"2024-11-05\"))\npost_el_cnn &lt;- cnn_posts |&gt; filter(pub_date &gt;= as.Date(\"2024-11-05\"))"
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5.html#analysis-of-all-youtube-videos",
+    "href": "EPPS6302/Dzogolo_Assignment5.html#analysis-of-all-youtube-videos",
+    "title": "Assignment 5",
+    "section": "Analysis of all YouTube Videos",
+    "text": "Analysis of all YouTube Videos\nThe analysis in this section, as well as in the subsequent ones, will focus on the titles of YouTube videos. The goal is to identify the most prevalent words used in these titles to understand how uploaders are framing their coverage of the elections. To visualize the frequency of these words, Word Clouds will be used, providing a clear and intuitive way to highlight key themes.\n\ntitles &lt;- us_election2024$title\ntitles_clean &lt;- titles |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\n\nword_freq &lt;- titles_clean |&gt; table() |&gt; as.data.frame(stringsAsFactors = FALSE)\ncolnames(word_freq) &lt;- c(\"word\", \"freq\")\nword_freq &lt;- filter(word_freq, !word %in% tm::stopwords(\"en\"))\n\nset.seed(123)\nwordcloud(word_freq$word, freq = word_freq$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 1. Word Frequency in US-Election Related Youtube Videos as of 11/18/2024\nAs shown in the word cloud above, Donald Trump’s name appears more frequently than Kamala Harris’s name. I suspect this is because, as of November 18, 2024, Donald Trump had been announced as the election winner nearly two weeks prior. Consequently, media coverage has likely focused more extensively on him. Further analyses in the sections below will help to either support or refute this hypothesis."
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5.html#analysis-of-cnn-videos",
+    "href": "EPPS6302/Dzogolo_Assignment5.html#analysis-of-cnn-videos",
+    "title": "Assignment 5",
+    "section": "Analysis of CNN Videos",
+    "text": "Analysis of CNN Videos\nBefore conducting a before-and-after analysis of election coverage on YouTube, I will first examine whether CNN’s reporting on the elections differs from that of all media outlets in general. The script used for this analysis is provided below:\n\ncnn_titles &lt;- cnn_posts$title\ncnn_titles_clean &lt;- cnn_titles |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\ncnn_word_freq &lt;- cnn_titles_clean |&gt; table() |&gt; as.data.frame(stringsAsValues = F)\ncolnames(cnn_word_freq) &lt;- c(\"word\", \"freq\")\ncnn_word_freq &lt;- cnn_word_freq |&gt; filter(!word %in% tm::stopwords(\"en\"))\n\nset.seed(123)\nwordcloud(cnn_word_freq$word, freq = cnn_word_freq$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 2. Word Frequency in YouTube Titles from CNN as of 11/18/2024\nThe word cloud indicates that Trump remains the most frequently mentioned name in YouTube video titles. However, the difference is less pronounced compared to the analysis of all videos. Another frequently appearing word in CNN titles is “Enten,” which refers to one of their journalists, Harry Enten."
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5.html#prepost-election-day-analysis",
+    "href": "EPPS6302/Dzogolo_Assignment5.html#prepost-election-day-analysis",
+    "title": "Assignment 5",
+    "section": "Pre/Post Election Day Analysis",
+    "text": "Pre/Post Election Day Analysis\n\nAll videos\n\nBefore Election Day\nIn the word cloud below, containing only title of videos published before election day, Trump continues to lead in mentions within YouTube video titles. However, the difference is less pronounced compared to the first word cloud (fig. 1), aligning more closely with CNN’s coverage patternsb(fig. 2).\n\npre_election_posts &lt;- us_election2024 |&gt; filter(pub_date &lt; as.Date(\"2024-11-05\"))\npre_el_title = pre_election_posts$title\npost_el_title = post_election_posts$title\npre_el_clean = pre_el_title |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \")|&gt;\n  unlist()\n\npost_el_clean &lt;- post_el_title |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\n\nword_freq_pre_el &lt;- table(pre_el_clean) |&gt; \n  as.data.frame(stringsAsFactors = FALSE) \ncolnames(word_freq_pre_el) &lt;- c(\"word\", \"freq\")\nword_freq_pre_el &lt;- word_freq_pre_el |&gt; filter(!word %in% tm::stopwords(\"en\"))\nset.seed(123)\nwordcloud(word_freq_pre_el$word, freq = word_freq_pre_el$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 3. Word Frequency in YouTube Titles Before Election Day as of 11/18/2024\n\n\nAfter Election Day\nIn sharp contrast to fig. 3, Trump takes a clear lead in title mentions after the election results were published. This shift lends further support to my hypothesis that media outlets began reporting significantly more about Trump than Harris after he was declared the winner of the race.\n\npost_election_posts &lt;- us_election2024 |&gt; filter(pub_date &gt;= as.Date(\"2024-11-05\"))\npost_el_title = post_election_posts$title\npost_el_clean &lt;- post_el_title |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\n\nword_freq_post_el &lt;- post_el_clean |&gt; table() |&gt;\n  as.data.frame(stringsAsFactors = F)\ncolnames(word_freq_post_el) &lt;- c(\"word\", \"freq\")\nword_freq_post_el &lt;- word_freq_post_el |&gt; filter(!word %in% tm::stopwords(\"en\"))\n\nset.seed(123)\nwordcloud(word_freq_post_el$word, freq = word_freq_post_el$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 4. Word Frequency in US-Election-Related YouTube Videos After Election Day as of 11/18/2024\n\n\n\nCNN Videos\n\nBefore Election Day\nIn CNN posts published before election day, Trump and Harris are mentioned in titles at nearly equal rates. This finding is noteworthy, as it may suggest that CNN aimed to maintain a balanced level of exposure for each candidate. However, further research is required to substantiate this observation.\n\npre_el_cnn &lt;- cnn_posts |&gt; filter(pub_date &lt; as.Date(\"2024-11-05\"))\ncnn_pre_el_titles = pre_el_cnn$title\ncnn_pre_titles_clean &lt;- cnn_pre_el_titles |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\n\ncnn_pre_word_freq &lt;- cnn_pre_titles_clean |&gt; table() |&gt; as.data.frame(stringsAsFactors = F)\ncolnames(cnn_pre_word_freq) &lt;- c(\"word\", \"freq\")\ncnn_pre_word_freq &lt;- cnn_pre_word_freq |&gt; filter(!word %in% tm::stopwords(\"en\"))\n\nset.seed(123)\nwordcloud(cnn_pre_word_freq$word, freq = cnn_pre_word_freq$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 5. Word Frequency in US-Election Related YouTube Videos Before Election Day from CNN as of 11/18/2024\n\n\nAfter Election Day\nAfter election day, Harris disappears from the list of most frequent words in CNN’s YouTube titles. However, CNN appears to use terms like “election” and “result” significantly more often than the word “Trump.”\n\npost_el_cnn &lt;- cnn_posts |&gt; filter(pub_date &gt;= as.Date(\"2024-11-05\"))\ncnn_post_el_titles &lt;- post_el_cnn$title\ncnn_post_titles_clean &lt;- cnn_post_el_titles |&gt; tolower() |&gt;\n  stri_replace_all_regex(\"[[:punct:]]\", \"\") |&gt;\n  str_split(\" \") |&gt;\n  unlist()\n\ncnn_post_word_freq &lt;- cnn_post_titles_clean |&gt; table() |&gt; as.data.frame(stringsAsValues = F)\ncolnames(cnn_post_word_freq) &lt;- c(\"word\", \"freq\")\ncnn_post_word_freq &lt;- filter(cnn_post_word_freq, !word %in% tm::stopwords(\"en\"))\n\nset.seed(123)\nwordcloud(cnn_post_word_freq$word, freq = cnn_post_word_freq$freq, max.words = 50)\n\n\n\n\n\n\n\n\nFigure 6. Word Frequency in US-Election Related Youtube Videos After Election Day from CNN as of 11/1/2024"
+  },
+  {
+    "objectID": "EPPS6302/Dzogolo_Assignment5.html#concluding-remarks",
+    "href": "EPPS6302/Dzogolo_Assignment5.html#concluding-remarks",
+    "title": "Assignment 5",
+    "section": "Concluding Remarks",
+    "text": "Concluding Remarks\nThis project aimed to demonstrate the use of NLP techniques for conducting an exploratory data analysis of YouTube content. Code was provided to help others replicate the results.\nThe study revealed interesting patterns that can be explored further. For example, media outlets tend to mention Trump more than Harris in their YouTube content, especially after the election results were announced. CNN, however, seemed to offer balanced coverage of both Trump and Harris before election day. After the results were published, CNN, like other media, reduced coverage of Harris. Another notable difference with CNN is that, after the results were announced, they used more neutral terms like “results” or “election” and less frequently mentioned “Trump.”"
   }
 ]
