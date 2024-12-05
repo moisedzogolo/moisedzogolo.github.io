@@ -8,7 +8,7 @@
 
 <meta name="author" content="Moise Dzogolo">
 
-<title>Assignment #5 - Part 2: Quanteda – Moise Dzogolo</title>
+<title>Assignment 4 – Moise Dzogolo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,6 +141,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-epps-6302">    
         <li>
+    <a class="dropdown-item" href="../EPPS6302/Assignment2.html">
+ <span class="dropdown-text">Assignment #2</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../EPPS6302/Assignment3.html">
  <span class="dropdown-text">Assignment #3</span></a>
   </li>  
@@ -181,10 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#libraries-loading-and-data-pre-processing" id="toc-libraries-loading-and-data-pre-processing" class="nav-link" data-scroll-target="#libraries-loading-and-data-pre-processing">Libraries loading and data pre-processing</a></li>
-  <li><a href="#analysis-of-title-content" id="toc-analysis-of-title-content" class="nav-link" data-scroll-target="#analysis-of-title-content">Analysis of Title Content</a></li>
-  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
+  <li><a href="#scraping-with-rvest" id="toc-scraping-with-rvest" class="nav-link active" data-scroll-target="#scraping-with-rvest">Scraping with rvest</a></li>
   </ul>
 </nav>
     </div>
@@ -193,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Assignment #5 - Part 2: Quanteda</h1>
+<h1 class="title">Assignment 4</h1>
 </div>
 
 
@@ -216,172 +217,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This projects replicates the YouTube election coverage analysis performed <a href="../EPPS6302/Dzogolo_Assignment5.html">here</a>. The particularity of the present project is the use of the <code>quanteda</code> package and the suite of accompanying libraries.</p>
-</section>
-<section id="libraries-loading-and-data-pre-processing" class="level2">
-<h2 class="anchored" data-anchor-id="libraries-loading-and-data-pre-processing">Libraries loading and data pre-processing</h2>
-<p>In the block below, I load the YouTube dataset collected in the previous project, and I create a corpus to begin my analysis with <code>quanteda</code>. I also create and indicator variable to determine whether a video was posted before or after election day.</p>
+<section id="scraping-with-rvest" class="level2">
+<h2 class="anchored" data-anchor-id="scraping-with-rvest">Scraping with rvest</h2>
+<p>In the script below, I use the <code>r</code>vest` package to scrape a table of US cities ranked by their population.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading Packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(quanteda, quanteda.textplots, quanteda.textmodels, dplyr, readtext)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading dataset</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readtext</span>(path, <span class="at">text_field =</span> <span class="st">'title'</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the corpus</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>yt_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(data)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick inspection of the corpus and data prep</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(yt_corpus) <span class="sc">|&gt;</span> <span class="fu">names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tidyverse")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("rvest")</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(rvest)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">'https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population'</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading the HTML code from the Wiki website</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>wikiforcities <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(wikiforcities)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "V1"                        "video_id"                 
- [3] "publishedAt"               "channelId"                
- [5] "description"               "thumbnails.default.url"   
- [7] "thumbnails.default.width"  "thumbnails.default.height"
- [9] "thumbnails.medium.url"     "thumbnails.medium.width"  
-[11] "thumbnails.medium.height"  "thumbnails.high.url"      
-[13] "thumbnails.high.width"     "thumbnails.high.height"   
-[15] "channelTitle"              "liveBroadcastContent"     
-[17] "publishTime"               "pub_date"                 </code></pre>
+<pre><code>[1] "xml_document" "xml_node"    </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(yt_corpus, <span class="st">'pub_date'</span>) <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">docvars</span>(yt_corpus, <span class="st">'publishedAt'</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(yt_corpus, <span class="st">'pub_date'</span>) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>city_pop <span class="ot">&lt;-</span> wikiforcities <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="at">xpath=</span><span class="st">'//*[@id="mw-content-text"]/div[1]/table[3]'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(city_pop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-11-15" "2024-11-14" "2024-11-06" "2024-11-12" "2024-11-06"
-[6] "2024-11-06"</code></pre>
+<pre><code>[1] "list"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(yt_corpus, <span class="st">'after_election_day'</span>) <span class="ot">&lt;-</span> <span class="fu">docvars</span>(yt_corpus, <span class="st">'pub_date'</span>) <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(yt_corpus, <span class="st">'after_election_day'</span>) <span class="ot">&lt;-</span> <span class="fu">docvars</span>(yt_corpus, <span class="st">'after_election_day'</span>) <span class="sc">|&gt;</span> <span class="fu">as.integer</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In the lines below, I perform further preprocessing tasks. Namely, I create tokens, remove punctuations and stopwords, and I create document feature matrices. I also create an indicator variable to determine whether the videos were posted by CNN.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(yt_corpus, <span class="st">'channelTitle'</span>) <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> <span class="fu">top_n</span>(<span class="dv">5</span>) <span class="sc">|&gt;</span> <span class="fu">print</span>() <span class="co"># Top 10 channels by number of posts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Selecting by Freq</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>table_final <span class="ot">&lt;-</span> city_pop[[<span class="dv">1</span>]][<span class="dv">2</span><span class="sc">:</span><span class="dv">337</span>, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>)]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>table_final <span class="sc">|&gt;</span> <span class="fu">class</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        Var1 Freq
-1   BBC News   19
-2        CNN   37
-3 CNN-News18   18
-4  Firstpost   50
-5   Sky News   30</code></pre>
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(yt_corpus, <span class="st">'CNN_post'</span>) <span class="ot">&lt;-</span> <span class="fu">docvars</span>(yt_corpus, <span class="st">'channelTitle'</span>) <span class="sc">==</span> <span class="st">"CNN"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>table_final <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  City            ST    `2023estimate` `2020census` Change `2020 land area`
+  &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;           
+1 New York[c]     NY    8,258,035      8,804,190    −6.20% 300.5           
+2 Los Angeles     CA    3,820,914      3,898,747    −2.00% 469.5           
+3 Chicago         IL    2,664,452      2,746,388    −2.98% 227.7           
+4 Houston         TX    2,314,157      2,304,580    +0.42% 640.4           
+5 Phoenix         AZ    1,650,070      1,608,139    +2.61% 518.0           
+6 Philadelphia[d] PA    1,550,542      1,603,797    −3.32% 134.4           
+# ℹ 4 more variables: `2020 land area` &lt;chr&gt;, `2020 density` &lt;chr&gt;,
+#   `2020 density` &lt;chr&gt;, Location &lt;chr&gt;</code></pre>
 </div>
-</section>
-<section id="analysis-of-title-content" class="level2">
-<h2 class="anchored" data-anchor-id="analysis-of-title-content">Analysis of Title Content</h2>
-<p>The next six word cloud replicate those generated in <a href="../EPPS6302/Dzogolo_Assignment5.html">the previous project</a></p>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>toks <span class="ot">&lt;-</span> yt_corpus <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">|&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>dfm_all <span class="ot">=</span> <span class="fu">dfm</span>(toks)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(dfm_all, <span class="at">max_words =</span> <span class="dv">50</span>, <span class="at">min_size =</span> <span class="dv">2</span>, <span class="at">max_size =</span> <span class="fl">6.5</span>, <span class="at">color =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Dzogolo_Assignment5_2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Changing variable names</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(table_final)<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'City'</span>, <span class="st">'State'</span>, <span class="st">'Pop_Est_2023'</span>, <span class="st">'Census_2020'</span>, <span class="st">'Pop_Change'</span>, <span class="st">'Land_Area_Sq_Mi2020'</span>, <span class="st">'Land_Area_Sq_Km2020'</span>, <span class="st">'Pop_Dens_2020_mi2'</span>, <span class="st">'Pop_Dens_2020_km2'</span>, <span class="st">'Coordinates'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>table_final <span class="sc">|&gt;</span> <span class="fu">names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "City"                "State"               "Pop_Est_2023"       
+ [4] "Census_2020"         "Pop_Change"          "Land_Area_Sq_Mi2020"
+ [7] "Land_Area_Sq_Km2020" "Pop_Dens_2020_mi2"   "Pop_Dens_2020_km2"  
+[10] "Coordinates"        </code></pre>
 </div>
 </div>
-</div>
-<p>Figure 1. 50 Most Frequent Words Used in US-Election Related YouTube Posts as of 11/18/2024</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dfm_before <span class="ot">=</span> <span class="fu">corpus_subset</span>(yt_corpus, after_election_day <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">'en'</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>()</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(dfm_before, <span class="at">max_words =</span> <span class="dv">50</span>, <span class="at">min_size =</span> <span class="dv">2</span>, <span class="at">max_size =</span> <span class="fl">6.5</span>, <span class="at">color =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Dzogolo_Assignment5_2_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Figure 2. 50 Most Frequent Words Used in US-Election Related YouTube Posts Before Election Day</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dfm_after <span class="ot">&lt;-</span> yt_corpus <span class="sc">|&gt;</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corpus_subset</span>(after_election_day <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T, <span class="at">remove_symbols =</span> T) <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>()</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(dfm_after, <span class="at">max_words =</span> <span class="dv">50</span>, <span class="at">min_size =</span> <span class="dv">2</span>, <span class="at">max_size =</span> <span class="fl">6.5</span>, <span class="at">color =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Dzogolo_Assignment5_2_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Figure 3. 50 Most Frequent Words Used in US-Election Related YouTube Posts after Election Day as of 11/18/2024</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dfm_cnn <span class="ot">&lt;-</span> yt_corpus <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corpus_subset</span>(CNN_post <span class="sc">==</span> T) <span class="sc">|&gt;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T) <span class="sc">|&gt;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>()</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(dfm_cnn, <span class="at">max_words =</span> <span class="dv">50</span>, <span class="at">min_size =</span> <span class="dv">2</span>, <span class="at">max_size =</span> <span class="fl">6.5</span>, <span class="at">color =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Dzogolo_Assignment5_2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Figure 4. 50 Most Frequent Words Used in US-Election Related YouTube Videos Posted by CNN as of 11/18/2024</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dfm_cnn_before <span class="ot">&lt;-</span> yt_corpus <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corpus_subset</span>(CNN_post <span class="sc">==</span> T) <span class="sc">|&gt;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corpus_subset</span>(after_election_day <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T) <span class="sc">|&gt;</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>()</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(dfm_cnn_before, <span class="at">max_words =</span> <span class="dv">50</span>, <span class="at">min_size =</span> <span class="dv">2</span>, <span class="at">max_size =</span> <span class="fl">6.5</span>, <span class="at">color =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Dzogolo_Assignment5_2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Figure 5. 50 Most Frequent Words Used in US-Election Related YouTube Videos Posted before Election Day</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dfm_cnn_after <span class="ot">&lt;-</span> yt_corpus <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corpus_subset</span>(CNN_post <span class="sc">==</span> T) <span class="sc">|&gt;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">corpus_subset</span>(after_election_day <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens</span>(<span class="at">remove_punct =</span> T) <span class="sc">|&gt;</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_remove</span>(<span class="fu">stopwords</span>(<span class="st">"en"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>()</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(dfm_cnn_after, <span class="at">max_words =</span> <span class="dv">50</span>, <span class="at">min_size =</span> <span class="dv">2</span>, <span class="at">max_size =</span> <span class="fl">6.5</span>, <span class="at">color =</span> colorspace<span class="sc">::</span><span class="fu">diverge_hcl</span>(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Dzogolo_Assignment5_2_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Figure 6. 50 Most Frequent Words Used in US-Election Related YouTube Videos Posted by CNN after Election Day as of 11/18/2024</p>
-</section>
-<section id="concluding-remarks" class="level2">
-<h2 class="anchored" data-anchor-id="concluding-remarks">Concluding Remarks</h2>
-<p><code>quanteda</code> can be used to perform the same analysis conducted in <a href="../EPPS6302/Dzogolo_Assignment5.html">the previous project</a>. While several packages were used to prepocess the in the earlier project, quanteda offers virtually all the tools to carry out the project from the beginning to the end. <code>readtext</code> is a useful package to read text data from <code>csv</code> files, but it can also read from <code>json</code> and and <code>XML</code>. One notable difference in text processing is that <code>stringi</code> and <code>tm</code> seemed to have performed a better job removing stopwords and punctuation. Indeed, the word cloud in the current project included noticeably more unwanted characters than the ones in the earlier project.</p>
+<p>The data was relatively easy to scrape. The major issue I encountered is the coordinates for the first cities that did not get scraped properly.</p>
 
 
 </section>

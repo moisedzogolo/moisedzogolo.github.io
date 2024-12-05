@@ -1,0 +1,44 @@
+---
+title: "Assignment 4"
+author: "Moise Dzogolo"
+format: html
+editor: visual
+---
+
+## Scraping with rvest
+
+In the script below, I use the `r`vest\` package to scrape a table of US cities ranked by their population.
+
+```{r}
+# install.packages("tidyverse")
+pacman::p_load(tidyverse)
+# install.packages("rvest")
+pacman::p_load(rvest)
+
+url <- 'https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population'
+#Reading the HTML code from the Wiki website
+wikiforcities <- read_html(url)
+class(wikiforcities)
+```
+
+```{r}
+city_pop <- wikiforcities |>
+  html_nodes(xpath='//*[@id="mw-content-text"]/div[1]/table[3]') |>
+  html_table()
+class(city_pop)
+```
+
+```{r}
+table_final <- city_pop[[1]][2:337, c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)]
+table_final |> class()
+table_final |> head()
+```
+
+```{r}
+# Changing variable names
+colnames(table_final)<- c('City', 'State', 'Pop_Est_2023', 'Census_2020', 'Pop_Change', 'Land_Area_Sq_Mi2020', 'Land_Area_Sq_Km2020', 'Pop_Dens_2020_mi2', 'Pop_Dens_2020_km2', 'Coordinates')
+
+table_final |> names()
+```
+
+The data was relatively easy to scrape. The major issue I encountered is the coordinates for the first cities that did not get scraped properly.

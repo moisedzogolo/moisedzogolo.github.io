@@ -1,0 +1,42 @@
+---
+title: "Assignment #2"
+author: "Moise Dzogolo"
+format: html
+editor: visual
+---
+
+In this project, I use the `gtrendsR` package to request Google Trends data.The script I have used is below. The same data can also be downloaded from the Google Trends website, but gtrends gives more details.
+
+Indeed, through the website, each dataset of interest must be downloaded individually. For example, one must download a trend over time, then trends by country, etc. With `gtrendsR`, on the other hand, a single line of code returns different dataset, and the user may select the one they wish to use as the request returns a list of datasets.
+
+Another difference between downloaded data and the one from `gtrendsR` is that the downloaded data shows the date and time for each observation. The date seems to be missing from the `gtrendsR` returned data.
+
+```{r}
+## Load library and run gtrends
+pacman::p_load(gtrendsR)
+HarrisTrumpElection = gtrends(c("Trump","Harris","election"), time = "all")
+```
+
+```{r}
+HarrisTrumpElection_interest <- HarrisTrumpElection$interest_over_time
+## Plot data
+par(family="Georgia")
+plot(HarrisTrumpElection_interest$hits, type="l")
+```
+
+```{r}
+## Collect data by timeframe
+
+gtrends(c("Harris", "Trump"), time = "now 1-H") # last hour
+# gtrends(c("Harris", "Trump"), time = "today 1-m") # last 30 days
+```
+
+```{r}
+## Collect data by country
+
+tg_gb <- gtrends(c("immigrants"), geo = c("GB", "US"), time = "now 1-H") 
+
+## Check country codes
+ 
+data("countries")
+```

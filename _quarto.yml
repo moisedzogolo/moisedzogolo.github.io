@@ -12,8 +12,10 @@ website:
       - research.qmd
       - text: "EPPS 6302"
         menu:
-          - href: "EPPS 6302/Assignment 1.qmd"
-            text: "Assignment #1"
+          - href: "EPPS6302/Assignment2.qmd"
+            text: "Assignment #2"
+          - href: "EPPS6302/Assignment3.qmd"
+            text: "Assignment #3"
           - href: "EPPS6302/Dzogolo_Assignment5.qmd"
             text: "Assignment #5"
           - href: "EPPS6302/Dzogolo_Assignment5_2.qmd"
