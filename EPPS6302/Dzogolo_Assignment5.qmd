@@ -75,6 +75,7 @@ word_freq <- filter(word_freq, !word %in% tm::stopwords("en"))
 set.seed(123)
 wordcloud(word_freq$word, freq = word_freq$freq, max.words = 50)
 ```
+
 Figure 1. Word Frequency in US-Election Related Youtube Videos as of 11/18/2024
 
 As shown in the word cloud above, Donald Trump's name appears more frequently than Kamala Harris's name. I suspect this is because, as of November 18, 2024, Donald Trump had been announced as the election winner nearly two weeks prior. Consequently, media coverage has likely focused more extensively on him. Further analyses in the sections below will help to either support or refute this hypothesis.
@@ -82,6 +83,7 @@ As shown in the word cloud above, Donald Trump's name appears more frequently th
 ## Analysis of CNN Videos
 
 Before conducting a before-and-after analysis of election coverage on YouTube, I will first examine whether CNN's reporting on the elections differs from that of all media outlets in general. The script used for this analysis is provided below:
+
 ```{r}
 cnn_titles <- cnn_posts$title
 cnn_titles_clean <- cnn_titles |> tolower() |>
@@ -95,6 +97,7 @@ cnn_word_freq <- cnn_word_freq |> filter(!word %in% tm::stopwords("en"))
 set.seed(123)
 wordcloud(cnn_word_freq$word, freq = cnn_word_freq$freq, max.words = 50)
 ```
+
 Figure 2. Word Frequency in YouTube Titles from CNN as of 11/18/2024
 
 The word cloud indicates that Trump remains the most frequently mentioned name in YouTube video titles. However, the difference is less pronounced compared to the analysis of all videos. Another frequently appearing word in CNN titles is "Enten," which refers to one of their journalists, Harry Enten.
@@ -106,6 +109,7 @@ The word cloud indicates that Trump remains the most frequently mentioned name i
 #### *Before Election Day*
 
 In the word cloud below, containing only title of videos published before election day, Trump continues to lead in mentions within YouTube video titles. However, the difference is less pronounced compared to the first word cloud (fig. 1), aligning more closely with CNN's coverage patternsb(fig. 2).
+
 ```{r}
 pre_election_posts <- us_election2024 |> filter(pub_date < as.Date("2024-11-05"))
 pre_el_title = pre_election_posts$title
@@ -127,10 +131,13 @@ word_freq_pre_el <- word_freq_pre_el |> filter(!word %in% tm::stopwords("en"))
 set.seed(123)
 wordcloud(word_freq_pre_el$word, freq = word_freq_pre_el$freq, max.words = 50)
 ```
+
 Figure 3. Word Frequency in YouTube Titles Before Election Day as of 11/18/2024
 
 #### *After Election Day*
+
 In sharp contrast to fig. 3, Trump takes a clear lead in title mentions after the election results were published. This shift lends further support to my hypothesis that media outlets began reporting significantly more about Trump than Harris after he was declared the winner of the race.
+
 ```{r}
 post_election_posts <- us_election2024 |> filter(pub_date >= as.Date("2024-11-05"))
 post_el_title = post_election_posts$title
@@ -147,6 +154,7 @@ word_freq_post_el <- word_freq_post_el |> filter(!word %in% tm::stopwords("en"))
 set.seed(123)
 wordcloud(word_freq_post_el$word, freq = word_freq_post_el$freq, max.words = 50)
 ```
+
 Figure 4. Word Frequency in US-Election-Related YouTube Videos After Election Day as of 11/18/2024
 
 ### CNN Videos
@@ -154,6 +162,7 @@ Figure 4. Word Frequency in US-Election-Related YouTube Videos After Election Da
 #### *Before Election Day*
 
 In CNN posts published before election day, Trump and Harris are mentioned in titles at nearly equal rates. This finding is noteworthy, as it may suggest that CNN aimed to maintain a balanced level of exposure for each candidate. However, further research is required to substantiate this observation.
+
 ```{r}
 pre_el_cnn <- cnn_posts |> filter(pub_date < as.Date("2024-11-05"))
 cnn_pre_el_titles = pre_el_cnn$title
@@ -169,11 +178,13 @@ cnn_pre_word_freq <- cnn_pre_word_freq |> filter(!word %in% tm::stopwords("en"))
 set.seed(123)
 wordcloud(cnn_pre_word_freq$word, freq = cnn_pre_word_freq$freq, max.words = 50)
 ```
+
 Figure 5. Word Frequency in US-Election Related YouTube Videos Before Election Day from CNN as of 11/18/2024
 
 #### *After Election Day*
 
 After election day, Harris disappears from the list of most frequent words in CNN's YouTube titles. However, CNN appears to use terms like "election" and "result" significantly more often than the word "Trump."
+
 ```{r}
 post_el_cnn <- cnn_posts |> filter(pub_date >= as.Date("2024-11-05"))
 cnn_post_el_titles <- post_el_cnn$title
@@ -189,6 +200,7 @@ cnn_post_word_freq <- filter(cnn_post_word_freq, !word %in% tm::stopwords("en"))
 set.seed(123)
 wordcloud(cnn_post_word_freq$word, freq = cnn_post_word_freq$freq, max.words = 50)
 ```
+
 Figure 6. Word Frequency in US-Election Related Youtube Videos After Election Day from CNN as of 11/1/2024
 
 ## Concluding Remarks

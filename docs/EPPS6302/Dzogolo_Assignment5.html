@@ -140,12 +140,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-epps-6302">    
         <li>
+    <a class="dropdown-item" href="../EPPS6302/Assignment2.html">
+ <span class="dropdown-text">Assignment #2</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../EPPS6302/Assignment3.html">
  <span class="dropdown-text">Assignment #3</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../EPPS6302/Dzogolo_Assignment5.html">
  <span class="dropdown-text">Assignment #5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../EPPS6302/Assignment4.html">
+ <span class="dropdown-text">Assignment #4</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../EPPS6302/Dzogolo_Assignment5_2.html">
@@ -233,24 +241,103 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading Libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tuber, stringi, lubridate, tm, wordcloud, ggplot2, httr, gridExtra, dplyr, stringr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/moise/AppData/Local/R/win-library/4.4'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>also installing the dependency 'plyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.4:
+  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.4/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>package 'plyr' successfully unpacked and MD5 sums checked
+package 'tuber' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+    C:\Users\moise\AppData\Local\Temp\RtmpqgLRPQ\downloaded_packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+tuber installed</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/moise/AppData/Local/R/win-library/4.4'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>also installing the dependencies 'NLP', 'slam'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.4:
+  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.4/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>package 'NLP' successfully unpacked and MD5 sums checked
+package 'slam' successfully unpacked and MD5 sums checked
+package 'tm' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+    C:\Users\moise\AppData\Local\Temp\RtmpqgLRPQ\downloaded_packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+tm installed</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/moise/AppData/Local/R/win-library/4.4'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.4:
+  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.4/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>package 'wordcloud' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+    C:\Users\moise\AppData\Local\Temp\RtmpqgLRPQ\downloaded_packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+wordcloud installed
+Installing package into 'C:/Users/moise/AppData/Local/R/win-library/4.4'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.4:
+  cannot open URL 'http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/4.4/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>package 'gridExtra' successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+    C:\Users\moise\AppData\Local\Temp\RtmpqgLRPQ\downloaded_packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+gridExtra installed</code></pre>
+</div>
 </div>
 </section>
 <section id="authenticating-your-youtube-api-credentials" class="level2">
 <h2 class="anchored" data-anchor-id="authenticating-your-youtube-api-credentials">Authenticating your YouTube API credentials</h2>
 <p>To access the YouTube API, authorization is required, which can be obtained through the Google Developer Console. Once this step is completed, the credentials must be authenticated. The <code>tuber</code> package provides a straightforward function to facilitate this authentication process.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># yt_oauth(ClientID, ClientSecret, token = "")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># yt_oauth(ClientID, ClientSecret, token = "")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="obtaining-data-from-youtube" class="level2">
 <h2 class="anchored" data-anchor-id="obtaining-data-from-youtube">Obtaining Data from YouTube</h2>
 <p>In the block below, I retrieve data on the videos that appear when searching for “US Elections 2024” on YouTube. Afterward, I preprocess the retrieved data for further analysis. A key step in this process is creating a data variable that will allow me to split the dataset into two subsets: one for pre-election day content and another for post-election day content.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># us_election2024 &lt;- yt_search("US Elections 2024")</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>us_election2024 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(us_election2024, <span class="at">pub_date =</span> <span class="fu">as.Date</span>(publishedAt))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># us_election2024 &lt;- yt_search("US Elections 2024")</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>us_election2024 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(us_election2024, <span class="at">pub_date =</span> <span class="fu">as.Date</span>(publishedAt))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(us_election2024)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(us_election2024)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "X"                         "video_id"                 
  [3] "publishedAt"               "channelId"                
@@ -263,30 +350,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [17] "liveBroadcastContent"      "publishTime"              
 [19] "pub_date"                 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cnn_posts <span class="ot">&lt;-</span> us_election2024 <span class="sc">|&gt;</span> <span class="fu">filter</span>(channelTitle <span class="sc">==</span> <span class="st">"CNN"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pre_election_posts <span class="ot">&lt;-</span> us_election2024 <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>post_election_posts <span class="ot">&lt;-</span> us_election2024 <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>pre_el_cnn <span class="ot">&lt;-</span> cnn_posts <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>post_el_cnn <span class="ot">&lt;-</span> cnn_posts <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cnn_posts <span class="ot">&lt;-</span> us_election2024 <span class="sc">|&gt;</span> <span class="fu">filter</span>(channelTitle <span class="sc">==</span> <span class="st">"CNN"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>pre_election_posts <span class="ot">&lt;-</span> us_election2024 <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>post_election_posts <span class="ot">&lt;-</span> us_election2024 <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>pre_el_cnn <span class="ot">&lt;-</span> cnn_posts <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>post_el_cnn <span class="ot">&lt;-</span> cnn_posts <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="analysis-of-all-youtube-videos" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-of-all-youtube-videos">Analysis of all YouTube Videos</h2>
 <p>The analysis in this section, as well as in the subsequent ones, will focus on the titles of YouTube videos. The goal is to identify the most prevalent words used in these titles to understand how uploaders are framing their coverage of the elections. To visualize the frequency of these words, Word Clouds will be used, providing a clear and intuitive way to highlight key themes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>titles <span class="ot">&lt;-</span> us_election2024<span class="sc">$</span>title</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>titles_clean <span class="ot">&lt;-</span> titles <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>word_freq <span class="ot">&lt;-</span> titles_clean <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>(<span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_freq) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>word_freq <span class="ot">&lt;-</span> <span class="fu">filter</span>(word_freq, <span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(word_freq<span class="sc">$</span>word, <span class="at">freq =</span> word_freq<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>titles <span class="ot">&lt;-</span> us_election2024<span class="sc">$</span>title</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>titles_clean <span class="ot">&lt;-</span> titles <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>word_freq <span class="ot">&lt;-</span> titles_clean <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>(<span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_freq) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>word_freq <span class="ot">&lt;-</span> <span class="fu">filter</span>(word_freq, <span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(word_freq<span class="sc">$</span>word, <span class="at">freq =</span> word_freq<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -302,17 +389,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="analysis-of-cnn-videos">Analysis of CNN Videos</h2>
 <p>Before conducting a before-and-after analysis of election coverage on YouTube, I will first examine whether CNN’s reporting on the elections differs from that of all media outlets in general. The script used for this analysis is provided below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cnn_titles <span class="ot">&lt;-</span> cnn_posts<span class="sc">$</span>title</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cnn_titles_clean <span class="ot">&lt;-</span> cnn_titles <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cnn_word_freq <span class="ot">&lt;-</span> cnn_titles_clean <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>(<span class="at">stringsAsValues =</span> F)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cnn_word_freq) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>cnn_word_freq <span class="ot">&lt;-</span> cnn_word_freq <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(cnn_word_freq<span class="sc">$</span>word, <span class="at">freq =</span> cnn_word_freq<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cnn_titles <span class="ot">&lt;-</span> cnn_posts<span class="sc">$</span>title</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>cnn_titles_clean <span class="ot">&lt;-</span> cnn_titles <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>cnn_word_freq <span class="ot">&lt;-</span> cnn_titles_clean <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>(<span class="at">stringsAsValues =</span> F)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cnn_word_freq) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>cnn_word_freq <span class="ot">&lt;-</span> cnn_word_freq <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(cnn_word_freq<span class="sc">$</span>word, <span class="at">freq =</span> cnn_word_freq<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -332,25 +419,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="before-election-day"><em>Before Election Day</em></h4>
 <p>In the word cloud below, containing only title of videos published before election day, Trump continues to lead in mentions within YouTube video titles. However, the difference is less pronounced compared to the first word cloud (fig.&nbsp;1), aligning more closely with CNN’s coverage patternsb(fig.&nbsp;2).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pre_election_posts <span class="ot">&lt;-</span> us_election2024 <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pre_el_title <span class="ot">=</span> pre_election_posts<span class="sc">$</span>title</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>post_el_title <span class="ot">=</span> post_election_posts<span class="sc">$</span>title</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>pre_el_clean <span class="ot">=</span> pre_el_title <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>)<span class="sc">|&gt;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>post_el_clean <span class="ot">&lt;-</span> post_el_title <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>word_freq_pre_el <span class="ot">&lt;-</span> <span class="fu">table</span>(pre_el_clean) <span class="sc">|&gt;</span> </span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>) </span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_freq_pre_el) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>word_freq_pre_el <span class="ot">&lt;-</span> word_freq_pre_el <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(word_freq_pre_el<span class="sc">$</span>word, <span class="at">freq =</span> word_freq_pre_el<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pre_election_posts <span class="ot">&lt;-</span> us_election2024 <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>pre_el_title <span class="ot">=</span> pre_election_posts<span class="sc">$</span>title</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>post_el_title <span class="ot">=</span> post_election_posts<span class="sc">$</span>title</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>pre_el_clean <span class="ot">=</span> pre_el_title <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>)<span class="sc">|&gt;</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>post_el_clean <span class="ot">&lt;-</span> post_el_title <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>word_freq_pre_el <span class="ot">&lt;-</span> <span class="fu">table</span>(pre_el_clean) <span class="sc">|&gt;</span> </span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_freq_pre_el) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>word_freq_pre_el <span class="ot">&lt;-</span> word_freq_pre_el <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(word_freq_pre_el<span class="sc">$</span>word, <span class="at">freq =</span> word_freq_pre_el<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -365,20 +452,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="after-election-day"><em>After Election Day</em></h4>
 <p>In sharp contrast to fig.&nbsp;3, Trump takes a clear lead in title mentions after the election results were published. This shift lends further support to my hypothesis that media outlets began reporting significantly more about Trump than Harris after he was declared the winner of the race.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>post_election_posts <span class="ot">&lt;-</span> us_election2024 <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>post_el_title <span class="ot">=</span> post_election_posts<span class="sc">$</span>title</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>post_el_clean <span class="ot">&lt;-</span> post_el_title <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>word_freq_post_el <span class="ot">&lt;-</span> post_el_clean <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="at">stringsAsFactors =</span> F)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_freq_post_el) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>word_freq_post_el <span class="ot">&lt;-</span> word_freq_post_el <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(word_freq_post_el<span class="sc">$</span>word, <span class="at">freq =</span> word_freq_post_el<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>post_election_posts <span class="ot">&lt;-</span> us_election2024 <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>post_el_title <span class="ot">=</span> post_election_posts<span class="sc">$</span>title</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>post_el_clean <span class="ot">&lt;-</span> post_el_title <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>word_freq_post_el <span class="ot">&lt;-</span> post_el_clean <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="at">stringsAsFactors =</span> F)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_freq_post_el) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>word_freq_post_el <span class="ot">&lt;-</span> word_freq_post_el <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(word_freq_post_el<span class="sc">$</span>word, <span class="at">freq =</span> word_freq_post_el<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -396,19 +483,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="before-election-day-1"><em>Before Election Day</em></h4>
 <p>In CNN posts published before election day, Trump and Harris are mentioned in titles at nearly equal rates. This finding is noteworthy, as it may suggest that CNN aimed to maintain a balanced level of exposure for each candidate. However, further research is required to substantiate this observation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pre_el_cnn <span class="ot">&lt;-</span> cnn_posts <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cnn_pre_el_titles <span class="ot">=</span> pre_el_cnn<span class="sc">$</span>title</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cnn_pre_titles_clean <span class="ot">&lt;-</span> cnn_pre_el_titles <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>cnn_pre_word_freq <span class="ot">&lt;-</span> cnn_pre_titles_clean <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>(<span class="at">stringsAsFactors =</span> F)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cnn_pre_word_freq) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>cnn_pre_word_freq <span class="ot">&lt;-</span> cnn_pre_word_freq <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(cnn_pre_word_freq<span class="sc">$</span>word, <span class="at">freq =</span> cnn_pre_word_freq<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pre_el_cnn <span class="ot">&lt;-</span> cnn_posts <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>cnn_pre_el_titles <span class="ot">=</span> pre_el_cnn<span class="sc">$</span>title</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>cnn_pre_titles_clean <span class="ot">&lt;-</span> cnn_pre_el_titles <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>cnn_pre_word_freq <span class="ot">&lt;-</span> cnn_pre_titles_clean <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>(<span class="at">stringsAsFactors =</span> F)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cnn_pre_word_freq) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>cnn_pre_word_freq <span class="ot">&lt;-</span> cnn_pre_word_freq <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(cnn_pre_word_freq<span class="sc">$</span>word, <span class="at">freq =</span> cnn_pre_word_freq<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -423,19 +510,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="after-election-day-1"><em>After Election Day</em></h4>
 <p>After election day, Harris disappears from the list of most frequent words in CNN’s YouTube titles. However, CNN appears to use terms like “election” and “result” significantly more often than the word “Trump.”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>post_el_cnn <span class="ot">&lt;-</span> cnn_posts <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cnn_post_el_titles <span class="ot">&lt;-</span> post_el_cnn<span class="sc">$</span>title</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>cnn_post_titles_clean <span class="ot">&lt;-</span> cnn_post_el_titles <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>cnn_post_word_freq <span class="ot">&lt;-</span> cnn_post_titles_clean <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>(<span class="at">stringsAsValues =</span> F)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cnn_post_word_freq) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>cnn_post_word_freq <span class="ot">&lt;-</span> <span class="fu">filter</span>(cnn_post_word_freq, <span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(cnn_post_word_freq<span class="sc">$</span>word, <span class="at">freq =</span> cnn_post_word_freq<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>post_el_cnn <span class="ot">&lt;-</span> cnn_posts <span class="sc">|&gt;</span> <span class="fu">filter</span>(pub_date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2024-11-05"</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>cnn_post_el_titles <span class="ot">&lt;-</span> post_el_cnn<span class="sc">$</span>title</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>cnn_post_titles_clean <span class="ot">&lt;-</span> cnn_post_el_titles <span class="sc">|&gt;</span> <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stri_replace_all_regex</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>cnn_post_word_freq <span class="ot">&lt;-</span> cnn_post_titles_clean <span class="sc">|&gt;</span> <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>(<span class="at">stringsAsValues =</span> F)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(cnn_post_word_freq) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"word"</span>, <span class="st">"freq"</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>cnn_post_word_freq <span class="ot">&lt;-</span> <span class="fu">filter</span>(cnn_post_word_freq, <span class="sc">!</span>word <span class="sc">%in%</span> tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(cnn_post_word_freq<span class="sc">$</span>word, <span class="at">freq =</span> cnn_post_word_freq<span class="sc">$</span>freq, <span class="at">max.words =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
