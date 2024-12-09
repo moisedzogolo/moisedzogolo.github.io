@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Moise Dzogolo">
 
-<title>Projects – Moise Dzogolo</title>
+<title>Assignment # 3 – Moise Dzogolo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +21,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -78,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Moise Dzogolo</span>
     </a>
   </div>
@@ -89,15 +124,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./projects.html" aria-current="page"> 
+    <a class="nav-link" href="../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./research.html"> 
+    <a class="nav-link" href="../research.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -106,23 +141,23 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-epps-6302">    
         <li>
-    <a class="dropdown-item" href="./EPPS6302/Assignment2.html">
+    <a class="dropdown-item" href="../EPPS6302/Assignment2.html">
  <span class="dropdown-text">Assignment #2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./EPPS6302/Assignment3.html">
+    <a class="dropdown-item" href="../EPPS6302/Assignment3.html">
  <span class="dropdown-text">Assignment #3</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./EPPS6302/Assignment4.html">
+    <a class="dropdown-item" href="../EPPS6302/Assignment4.html">
  <span class="dropdown-text">Assignment #4</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./EPPS6302/Dzogolo_Assignment5.html">
+    <a class="dropdown-item" href="../EPPS6302/Dzogolo_Assignment5.html">
  <span class="dropdown-text">Assignment #5</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./EPPS6302/Dzogolo_Assignment5_2.html">
+    <a class="dropdown-item" href="../EPPS6302/Dzogolo_Assignment5_2.html">
  <span class="dropdown-text">Assignment #5 - Part 2: Quanteda</span></a>
   </li>  
     </ul>
@@ -133,19 +168,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-epps-6356">    
         <li>
-    <a class="dropdown-item" href="./EPPS6356/6356Assignment 1.html">
+    <a class="dropdown-item" href="../EPPS6356/6356Assignment 1.html">
  <span class="dropdown-text">Assignment #1</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./EPPS6356/Assign2.html">
+    <a class="dropdown-item" href="../EPPS6356/Assign2.html">
  <span class="dropdown-text">Assignment #2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./EPPS6356/Assign3.html">
+    <a class="dropdown-item" href="../EPPS6356/Assign3.html">
  <span class="dropdown-text">Assignment #3</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./EPPS6356/Assign5.html">
+    <a class="dropdown-item" href="../EPPS6356/Assign5.html">
  <span class="dropdown-text">Assignment #5</span></a>
   </li>  
     </ul>
@@ -166,7 +201,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#work-in-progress" id="toc-work-in-progress" class="nav-link active" data-scroll-target="#work-in-progress">Work in Progress</a></li>
+  <li><a href="#murrell" id="toc-murrell" class="nav-link active" data-scroll-target="#murrell">Murrell</a></li>
+  <li><a href="#anscombes-quartet" id="toc-anscombes-quartet" class="nav-link" data-scroll-target="#anscombes-quartet">Anscombe’s quartet</a></li>
   </ul>
 </nav>
     </div>
@@ -175,13 +211,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Projects</h1>
+<h1 class="title">Assignment # 3</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Moise Dzogolo </p>
+          </div>
+  </div>
     
   
     
@@ -192,16 +234,146 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="work-in-progress" class="level1">
-<h1>Work in Progress</h1>
-<ol type="1">
-<li><p><u><strong>Autonomous Municipalities in Regional Transit Networks: Is Network Effectiveness Affected?</strong></u> This project explores the governance structures of multi-city transit agencies, focusing on how the option for individual cities to withdraw from the agency impacts ridership. Building on prior qualitative research involving interviews with transit professionals, the study confirms that this governance feature affects transit usage. These findings were presented at the 2023 ABFM conference.</p></li>
-<li><p><u><strong>Collaborative Governance and Revenue Generation: A Study of PILOT Programs in Boston</strong></u> This paper explores the dynamics of Payment in Lieu of Taxes (PILOT) programs, focusing on the collaborative process between local governments and tax-exempt entities. Using Boston’s highly regarded PILOT program as a case study, the research examines why cities initiate these programs and how nonprofits respond once they join. The study provides insights into the governance structures that contribute to the success of PILOT programs, highlighting the balance between municipal revenue generation and cooperation with nonprofits. The findings offer valuable lessons for other cities looking to implement or enhance their own PILOT initiatives.</p></li>
-<li><p><u><strong>Harnessing Big Data: Best Practices for Local Governments in Data Collection and Processing</strong></u> This paper explores best practices for the collection, processing, and analysis of big data, with a focus on local government applications. As data generation continues to expand at an unprecedented rate, particularly due to the digitalization of services, the ability to effectively manage and derive insights from this data becomes essential for public sector organizations. Through case studies and a review of current methodologies, this research provides practical strategies for local governments to unlock the potential of big data, while addressing associated challenges such as privacy concerns.</p></li>
-<li><p><u><strong>Addressing the Hollow State: Enhancing Emergency Response through Coproduction</strong></u> This paper examines the concept of the “hollow state,” where traditional government roles in social issues are diminished due to the increased prominence of non-state actors. Specifically, it explores how coproduction—where governments collaborate with non-state actors—can supplement state capacity in delivering public services, particularly in emergency response. By analyzing the evolving role of non-state actors in the U.S. and the UK, the paper investigates whether coproduction is more effective than exclusive government provision and evaluates its impact on emergency services. The research highlights the potential benefits and challenges of this collaborative approach in strengthening state responses to crises.</p></li>
-<li><p><u><strong>Participation Without Citizenship: Exploring Civic Involvement of Non-Naturalized Immigrants</strong></u> This qualitative research explores the political participation of non-naturalized immigrants in the United States. Through participant observation of immigrants at political demonstrations and in-depth interviews with immigrants engaged in politics and government workers supporting immigrant integration, the study investigates the dynamics of political involvement among this group. The research delves into how various factors, such as legal consciousness and socioeconomic status influence their engagement. By examining these interactions and experiences, the study aims to provide nuanced insights into the challenges and opportunities for non-naturalized immigrants in participating in the political sphere.</p></li>
-</ol>
-<pre><code></code></pre>
+<section id="murrell" class="level2">
+<h2 class="anchored" data-anchor-id="murrell">Murrell</h2>
+<p>The <code>par()</code> line in the script below sets margins from the four extremities of the plotting window. I left a margin of 3.5 lines of text at the bottom, 3.8 on the left, and none on the top and the right. The margins allow me to have place for margin labels.</p>
+<p>The <code>mtext</code>functions allows to add text to one of the margins of the plot window.In this case, <code>side = 1</code> represents the margin below the chart.</p>
+<p>The <code>legend</code> functions adds information about the chart for a better reading.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="fl">3.5</span>, <span class="fl">3.8</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(len <span class="sc">~</span> dose, <span class="at">data =</span> ToothGrowth,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">boxwex =</span> <span class="fl">0.25</span>, <span class="at">at =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">-</span> <span class="fl">0.2</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">subset=</span> supp <span class="sc">==</span> <span class="st">"VC"</span>, <span class="at">col=</span><span class="st">"white"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">""</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"tooth length"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">35</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">"Vitamin C dose (mg)"</span>, <span class="at">side=</span><span class="dv">1</span>, <span class="at">line=</span><span class="fl">2.5</span>, <span class="at">cex=</span><span class="fl">0.8</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(len <span class="sc">~</span> dose, <span class="at">data =</span> ToothGrowth, <span class="at">add =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">boxwex =</span> <span class="fl">0.25</span>, <span class="at">at =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">+</span> <span class="fl">0.2</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">subset=</span> supp <span class="sc">==</span> <span class="st">"OJ"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="fl">1.5</span>, <span class="dv">9</span>, <span class="fu">c</span>(<span class="st">"Ascorbic acid"</span>, <span class="st">"Orange juice"</span>), </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"gray"</span>), </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty=</span><span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Assign3_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mar=c(3, 4.1, 4.1, 2.1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="anscombes-quartet" class="level2">
+<h2 class="anchored" data-anchor-id="anscombes-quartet">Anscombe’s quartet</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create four model objects</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y1 <span class="sc">~</span> x1, <span class="at">data=</span>anscombe)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y1 ~ x1, data = anscombe)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.92127 -0.45577 -0.04136  0.70941  1.83882 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)   3.0001     1.1247   2.667  0.02573 * 
+x1            0.5001     0.1179   4.241  0.00217 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.237 on 9 degrees of freedom
+Multiple R-squared:  0.6665,    Adjusted R-squared:  0.6295 
+F-statistic: 17.99 on 1 and 9 DF,  p-value: 0.00217</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y2 <span class="sc">~</span> x2, <span class="at">data=</span>anscombe)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y2 ~ x2, data = anscombe)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.9009 -0.7609  0.1291  0.9491  1.2691 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)    3.001      1.125   2.667  0.02576 * 
+x2             0.500      0.118   4.239  0.00218 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.237 on 9 degrees of freedom
+Multiple R-squared:  0.6662,    Adjusted R-squared:  0.6292 
+F-statistic: 17.97 on 1 and 9 DF,  p-value: 0.002179</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y3 <span class="sc">~</span> x3, <span class="at">data=</span>anscombe)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y3 ~ x3, data = anscombe)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1586 -0.6146 -0.2303  0.1540  3.2411 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)   3.0025     1.1245   2.670  0.02562 * 
+x3            0.4997     0.1179   4.239  0.00218 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.236 on 9 degrees of freedom
+Multiple R-squared:  0.6663,    Adjusted R-squared:  0.6292 
+F-statistic: 17.97 on 1 and 9 DF,  p-value: 0.002176</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lm4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y4 <span class="sc">~</span> x4, <span class="at">data=</span>anscombe)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y4 ~ x4, data = anscombe)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-1.751 -0.831  0.000  0.809  1.839 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)   3.0017     1.1239   2.671  0.02559 * 
+x4            0.4999     0.1178   4.243  0.00216 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.236 on 9 degrees of freedom
+Multiple R-squared:  0.6667,    Adjusted R-squared:  0.6297 
+F-statistic:    18 on 1 and 9 DF,  p-value: 0.002165</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">bg =</span> <span class="st">'ivory2'</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anscombe<span class="sc">$</span>x1,anscombe<span class="sc">$</span>y1, <span class="at">pch =</span> <span class="dv">10</span>, <span class="at">col =</span> <span class="st">'firebrick3'</span>, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">coefficients</span>(lm1), <span class="at">col =</span> <span class="st">'blue'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anscombe<span class="sc">$</span>x2,anscombe<span class="sc">$</span>y2, <span class="at">pch =</span> <span class="dv">5</span>, <span class="at">col =</span> <span class="st">'cornflowerblue'</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">coefficients</span>(lm2), <span class="at">col =</span> <span class="st">'mediumvioletred'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anscombe<span class="sc">$</span>x3,anscombe<span class="sc">$</span>y3, <span class="at">pch =</span> <span class="dv">7</span>, <span class="at">col =</span><span class="st">'forestgreen'</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">coefficients</span>(lm3), <span class="at">col =</span> <span class="st">'darkslategrey'</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anscombe<span class="sc">$</span>x4,anscombe<span class="sc">$</span>y4, <span class="at">pch =</span> <span class="st">'8'</span>, <span class="at">col =</span> <span class="st">'blue'</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">coefficients</span>(lm4), <span class="at">col =</span> <span class="st">'red'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Assign3_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
