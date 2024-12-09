@@ -1,0 +1,55 @@
+---
+title: "Assignment # 3"
+author: "Moise Dzogolo"
+format: html
+editor: visual
+---
+
+## Murrell
+
+The `par()` line in the script below sets margins from the four extremities of the plotting window. I left a margin of 3.5 lines of text at the bottom, 3.8 on the left, and none on the top and the right. The margins allow me to have place for margin labels.
+
+The `mtext`functions allows to add text to one of the margins of the plot window.In this case, `side = 1` represents the margin below the chart.
+
+The `legend` functions adds information about the chart for a better reading.
+
+```{r}
+# Boxplot
+par(mar=c(3.5, 3.8, 0, 0))
+boxplot(len ~ dose, data = ToothGrowth,
+        boxwex = 0.25, at = 1:3 - 0.2,
+        subset= supp == "VC", col="white",
+        xlab="",
+        ylab="tooth length", ylim=c(0,35))
+mtext("Vitamin C dose (mg)", side=1, line=2.5, cex=0.8)
+boxplot(len ~ dose, data = ToothGrowth, add = TRUE,
+        boxwex = 0.25, at = 1:3 + 0.2,
+        
+        subset= supp == "OJ")
+legend(1.5, 9, c("Ascorbic acid", "Orange juice"), 
+       fill = c("white", "gray"), 
+       bty="n")
+#par(mar=c(3, 4.1, 4.1, 2.1))
+```
+
+## Anscombe's quartet
+```{r}
+# Create four model objects
+lm1 <- lm(y1 ~ x1, data=anscombe)
+summary(lm1)
+lm2 <- lm(y2 ~ x2, data=anscombe)
+summary(lm2)
+lm3 <- lm(y3 ~ x3, data=anscombe)
+summary(lm3)
+lm4 <- lm(y4 ~ x4, data=anscombe)
+summary(lm4)
+par(mfrow=c(2, 2), bg = 'ivory2')
+plot(anscombe$x1,anscombe$y1, pch = 10, col = 'firebrick3', cex = 3)
+abline(coefficients(lm1), col = 'blue')
+plot(anscombe$x2,anscombe$y2, pch = 5, col = 'cornflowerblue')
+abline(coefficients(lm2), col = 'mediumvioletred')
+plot(anscombe$x3,anscombe$y3, pch = 7, col ='forestgreen')
+abline(coefficients(lm3), col = 'darkslategrey')
+plot(anscombe$x4,anscombe$y4, pch = '8', col = 'blue')
+abline(coefficients(lm4), col = 'red')
+```

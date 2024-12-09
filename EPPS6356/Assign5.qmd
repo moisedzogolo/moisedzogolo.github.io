@@ -1,0 +1,61 @@
+---
+title: "Assignment #5"
+author: "Moise Dzogolo"
+editor: source
+---
+## Histogram
+```{r}
+cars <- data.frame(cars)
+cars |> names()
+par(bg = 'aliceblue', mar = c(4, 4, 5, 0))
+hist(cars$speed, col = 'orangered', main = '', xlab = '', ylab= '')
+mtext('Speed', side = 1, line = 2.5, cex = 1)
+mtext('Frequency', side = 2, line =2.5, cex = 1)
+mtext('Frequency Distribution of Car Speed', line = 2, cex = 2)
+```
+## Barchart
+```{r}
+# Vertical Bars
+pacman::p_load(fivethirtyeight)
+plot.new()
+biopics |> names()
+par(bg = 'ivory2', mar = c(4, 4, 5, 0))
+top_10_year <- biopics$year_release |> table() |> as.data.frame()|> dplyr::top_n(10)
+barplot(top_10_year$Freq, names.arg = top_10_year$Var1, col = 'skyblue')
+mtext('Number of Biopics Release by Years', side = 3, line = 3, cex = 2)
+mtext('Frequency', side = 2, line = 2, cex = 1)
+
+# Horizontal Bars
+par(bg = 'ivory2', mar = c(4, 6, 5, 0))
+top_10_year <- biopics$year_release |> table() |> as.data.frame()|> dplyr::top_n(10)
+barplot(top_10_year$Freq, names.arg = top_10_year$Var1, col = 'skyblue', horiz = T, las = 1, xlim = c(0, max(top_10_year$Freq) * 1.2))
+mtext('Number of Biopics Release by Years', side = 3, line = 3, cex = 2)
+mtext('Release Year', side = 2, line = 4, cex = 1)
+mtext('Frequency', side = 1, line = 2.3, cex = 1)
+```
+## Pie Chart
+```{r}
+major_cat <- college_all_ages$major_category |> table() |> as.data.frame() |> dplyr::top_n(5)
+pie(major_cat$Freq, labels = major_cat$Var1)
+mtext('Proportions of Major Categories', side =3, line = 1.1, cex = 2)
+```
+
+## Boxplot
+```{r}
+hate_crimes <- hate_crimes
+par(bg = 'skyblue')
+boxplot(hate_crimes$gini_index, col = 'firebrick')
+mtext('Distribution of Gini Index for US States', side = 3, line = 1.1)
+```
+
+## Scatterplot
+```{r}
+par(bg = 'grey90')
+lm = lm(gini_index ~ share_non_citizen, data = hate_crimes)
+plot(hate_crimes$gini_index, hate_crimes$share_non_citizen, xlab = '', ylab = '', col = 'royalblue', pch = 15)
+mtext('Share of Non Citizens', side = 1, line = 2.5)
+mtext('Gini Index', side = 2, line = 2.5)
+mtext("Scatter Plot of the Share of Non-Citizens and Gini Index")
+```
+
+
