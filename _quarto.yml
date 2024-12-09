@@ -26,6 +26,12 @@ website:
         menu:
           - href: "EPPS6356/6356Assignment 1.qmd"
             text: "Assignment #1"
+          - href: "EPPS6356/Assign2.qmd"
+            text: "Assignment #2"
+          - href: "EPPS6356/Assign3.qmd"
+            text: "Assignment #3"
+          - href: "EPPS6356/Assign5.qmd"
+            text: "Assignment #5"
 
 format:
   html:
